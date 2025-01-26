@@ -15,11 +15,10 @@
   }
   
   .catagory-container {
-    display: flex;
-    overflow-x: auto; /* Enable horizontal scrolling */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 40px; /* Space between cards */
     padding: 10px 0;
-    scroll-snap-type: x mandatory; /* Enable snapping for smooth scroll */
   }
   
   .catagory-container::-webkit-scrollbar {

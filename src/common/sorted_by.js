@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-const SortByDropdown = () => {
+const SortByDropdown = ({ onSortChange }) => {
   const [selectedOption, setSelectedOption] = useState("Best selling");
 
   const options = ["Best selling", "Price: Low to High", "Price: High to Low", "New arrivals"];
 
   const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+    const newValue = event.target.value;
+    setSelectedOption(newValue);
+    onSortChange(newValue);
   };
 
   return (
