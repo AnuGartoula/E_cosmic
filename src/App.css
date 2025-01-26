@@ -1,0 +1,194 @@
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #383838;
+  color: #fff;
+  padding: 1rem;
+}
+
+.navbar-upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-upper h2 {
+  font-size: 24px;
+  color: white;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 50%;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+/* Category section */
+.items .category-items {
+  list-style-type: none;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  padding: 10px 0;
+  justify-content: center;
+}
+.category-items li {
+  position: relative;
+}
+
+.category-items li a::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 0;
+  display: block;
+  bottom: -2px;
+  background-color: red;
+  transition: width 0.3s; /* Add a smooth transition */
+}
+
+.category-items li:hover a::after {
+  width: 100%;
+}
+
+
+.items .category-items li a {
+  text-decoration: none;
+  color: #383838;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Card container styling */
+.card-container {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping of items */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 20px; /* Space between cards */
+  padding: 20px;
+  scroll-snap-type: x mandatory;  /* Center the container */
+}
+
+@media (max-width: 1200px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on medium screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on small screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .card-container {
+    grid-template-columns: 1fr; /* 1 card per row on extra small screens */
+  }
+}
+
+/* Card styling */
+.card {
+  flex: 0 0 auto; /* Prevent cards from shrinking or growing */
+  width: 250px; /* Set a fixed width for each card */
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card-container::-webkit-scrollbar {
+  height: 8px; /* Height of the scrollbar */
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-content h2 {
+  font-size: 18px;
+  color: #383838;
+  margin-bottom: 10px;
+}
+
+.card-content p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+
+.title {
+  /* text-align: center; */
+  margin-top: 40px;
+  margin: 30px 50px;
+  color: #333;
+}
+
+.title h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  /* letter-spacing: 1px; */
+}
+
+
+.dropdown{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.dropdown-toggle:hover .dropdown  {
+  display: flex;
+}
+/* .dropdown-hover {
+  position: relative;
+}
+
+.dropdown-toggle {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+} */
+
+
+
+
+
+
+
