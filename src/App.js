@@ -26,43 +26,30 @@ function App() {
   const [data, setData] = useState([]);
   const [showSplash, setShowSplash] = useState(false);
 
-  // Function to handle the splash screen display
-  const displaySplashScreen = (duration) => {
+  const displaySplashScreen = (duration = 8000) => {
     setShowSplash(true);
     setTimeout(() => {
       setShowSplash(false);
     }, duration);
   };
 
-  const fetchDataWithSplash = async (fetchFunction, duration = 3000) => {
-    setShowSplash(true);
-    try {
-      await fetchFunction();
-    } finally {
-      setTimeout(() => setShowSplash(false), duration);
-    }
-  };
-
-  // Fetch data for the main page
   useEffect(() => {
-    fetchDataWithSplash(async () => {
-      const response = await fetch(
-        "http://makeup-api.herokuapp.com/api/v1/products.json?tags=popular"
-      );
-      const result = await response.json();
-      const sortedData = result.sort((a, b) => b.rating - a.rating);
-      const limitedData = sortedData.slice(0, limit);
-      setData(limitedData);
-    });
+    fetch("http://makeup-api.herokuapp.com/api/v1/products.json?tags=popular")
+      .then((result) => result.json())
+      .then((result) => {
+        const sortedData = result.sort((a, b) => b.rating - a.rating);
+        const limitedData = sortedData.slice(0, limit);
+        setData(limitedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   return (
     <Router>
       {showSplash && <SplashScreen />}
-      <PageTransition
-        displaySplash={displaySplashScreen}
-        fetchDataWithSplash={fetchDataWithSplash}
-      >
+      <PageTransition displaySplash={displaySplashScreen}>
         <div className="App">
           <nav className="navbar">
             <div className="navbar-upper">
@@ -159,32 +146,8 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/product/:id"
-              element={
-                <PageWithFetch
-                  fetchFunction={() =>
-                    fetch(`https://example.com/product-details`)
-                  }
-                  duration={5000}
-                >
-                  <ProductDetails />
-                </PageWithFetch>
-              }
-            />
-            <Route
-              path="/concerns/:id"
-              element={
-                <PageWithFetch
-                  fetchFunction={() =>
-                    fetch(`https://example.com/concerns-details`)
-                  }
-                  duration={5000}
-                >
-                  <ConcernDetails />
-                </PageWithFetch>
-              }
-            />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/concerns/:id" element={<ConcernDetails />} />
           </Routes>
         </div>
       </PageTransition>
@@ -192,36 +155,13 @@ function App() {
   );
 }
 
-const PageTransition = ({ children, displaySplash, fetchDataWithSplash }) => {
+const PageTransition = ({ children, displaySplash }) => {
   const location = useLocation();
-
   useEffect(() => {
-    displaySplash(7000);
+    displaySplash();
   }, [location]);
 
   return <>{children}</>;
-};
-
-const PageWithFetch = ({ fetchFunction, duration, children }) => {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setShowSplash(true);
-      try {
-        await fetchFunction();
-      } finally {
-        setTimeout(() => setShowSplash(false), duration);
-      }
-    };
-    fetchData();
-  }, [fetchFunction, duration]);
-
-  if (showSplash) {
-    return <SplashScreen />;
-  }
-
-  return children;
 };
 
 export default App;
