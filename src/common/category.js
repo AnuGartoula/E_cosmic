@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./category.css";
 
 const catagoryData = {
@@ -32,7 +32,7 @@ const catagoryData = {
 };
 
 function Catagory() {
-  const [images] = useState(catagoryData.images);
+  // const [images] = useState(catagoryData.images);
 
   return (
     <div className="catagory-Section">
@@ -41,7 +41,7 @@ function Catagory() {
       </div>
 
       <div className="catagory-container">
-        {images.map((image) => (
+        {catagoryData.images.map((image) => (
           <div className="catagory-card" key={image.id}>
             <img src={image.src} alt={image.alt} className="catagory-image" />
             <p className="catagory-title">{image.alt}</p>
