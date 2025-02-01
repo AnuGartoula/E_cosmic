@@ -1,67 +1,68 @@
-.Testimonials-section{
-    padding: 20px;
+.Testimonials-section {
+    padding: 40px 20px;
+    background-color: #fafafa;
+    text-align: center;
 }
 
 .title {
-    text-align: left;
-    margin-bottom: 20px;
-  }
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 40px;
+}
 
 .testimonials-container {
     display: flex;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    gap: 40px; /* Space between cards */
-    padding: 10px 0;
-    scroll-snap-type: x mandatory; /* Enable snapping for smooth scroll */
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    justify-content: center;
 }
 
-.testimony-card{
+.testimony-card {
     padding: 20px;
-    flex: 0 0 auto; /* Prevent the card from shrinking or growing */
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* height: 200px; */
-    width: 300px
-    ; /* Fixed width for cards */
+    flex: 0 0 auto;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 280px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-/* .testimonial-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  } */
-.testimony-name{
-    text-align: start;
-    font-size: 14px;
-    color: #555;
-   
-    
-    font-weight: bold;
-}
-.testimony-title{
-    text-align: start;
-    font-size: 18px;
-    color: #514d4d;
-    padding: 10px;
-    font-weight: bold;
-}
-.testimony-product{
-    margin-top: 30px;
-    text-align: start;
-    font-size: 14px;
-    color: #6a6a6a;
-    padding: 10px;
-    font-weight: bold;
-}
-.testimony-rating span {
-   
-    color: #f39c12; /* Gold color for filled stars */
-    font-size: 40px;
-  }
 
-  .testimony-rating{
-    text-align: start;
-    
-  }
+.testimony-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.testimony-name {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.testimony-title {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.testimony-product {
+    font-size: 14px;
+    color: #888;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.testimony-rating span {
+    color: #f39c12;
+    font-size: 24px;
+}
+
+.testimony-rating {
+    margin-bottom: 15px;
+}

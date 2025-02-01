@@ -20,6 +20,9 @@ import {
 import ProductDetails from "./common/product_detail";
 import ConcernDetails from "./common/concern_details";
 import SplashScreen from "./common/SplashScreen";
+import { FaSignInAlt } from "react-icons/fa";
+import LoginPage from "./common/login";
+
 
 function App() {
   const limit = 10;
@@ -80,6 +83,12 @@ function App() {
                   <a href="#">
                     <FaHeart />
                   </a>
+                </li>
+               
+                <li>
+                <Link to="/login">
+              <FaSignInAlt />
+            </Link>
                 </li>
               </ul>
             </div>
@@ -148,6 +157,7 @@ function App() {
             />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/concerns/:id" element={<ConcernDetails />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </div>
       </PageTransition>

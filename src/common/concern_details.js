@@ -61,6 +61,7 @@ function ConcernDetails() {
     };
 
     return (
+       
         <div className="catagory-Section">
             <div className="title">
                 <h3>Recommended Products</h3>
@@ -79,6 +80,8 @@ function ConcernDetails() {
                 ))}
             </div>
         </div>
+        
+       
     );
 }
 
