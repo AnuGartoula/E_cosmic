@@ -1,0 +1,52 @@
+.favorites-list {
+    margin-left: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the space between items */
+  }
+
+  h2{
+    margin-left: 50px;
+  }
+  
+  .favorite-item {
+
+    flex: 0 0 calc(23.33% - 10px); /* Adjust the width of each item (e.g., 3 items per row) */
+    box-sizing: border-box;
+    border: 1px solid #ddd; /* Optional border */
+    padding: 50px;
+  }
+  
+  .favorite-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .favorite-info {
+    text-align: center;
+  }
+  .price {
+    font-weight: bold; /* Makes price bold */
+    font-size: 1.2em;  /* Increase font size for emphasis */
+    color: #5f5c5c;    /* Make it stand out with a color */
+    margin: 10px 0;    /* Add space around the price */
+  }
+  
+  .view-details {
+    display: block; /* Ensure this is a block-level element so it appears below the price */
+    padding: 10px 20px;
+    margin-top: 10px; /* Add space between price and button */
+    background-color: #383838; /* Green background for the button */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold; /* Make text bold */
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-details:hover {
+    background-color: #554885; /* Darken the green on hover */
+  }
+  
+  

@@ -18,6 +18,12 @@
     padding: 20px 0;
     scroll-snap-type: x mandatory;
     justify-content: center;
+    -ms-overflow-style: none;  /* For Internet Explorer */
+    scrollbar-width: none;  /* For Firefox */
+}
+
+.testimonials-container::-webkit-scrollbar {
+    display: none;  /* For Chrome, Safari, and Edge */
 }
 
 .testimony-card {

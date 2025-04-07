@@ -1,16 +1,57 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const LoginPage = () => {
   // State to manage form inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [result, setResult] = useState("");
+
+  const navigate = useNavigate();
+
+  // Check if already logged in
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      navigate("/"); // Redirect if already logged in
+    }
+  }, [navigate]);
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    alert(`Logged in with Email: ${email}`);
+
+    console.log("Submitting:", { email, password });
+
+    try {
+      const response = await fetch("http://localhost:8000/server.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      console.log("Sending JSON:", JSON.stringify({ email, password }));
+      console.log("Response status:", response.status);
+      console.log("Response OK:", response.ok);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Response data:", data);
+      setResult(data.message);
+
+      if (data.message.startsWith("Hello")) {
+        localStorage.setItem("isLoggedIn", "true"); // Store login state
+        localStorage.setItem("userEmail", email); // Store user email
+        navigate("/"); // Redirect to home page
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setResult("An error occurred while logging in.");
+    }
   };
 
   return (
@@ -47,6 +88,7 @@ const LoginPage = () => {
           Login
         </button>
       </form>
+      <h1>{result}</h1>
     </div>
   );
 };
@@ -68,7 +110,6 @@ const styles = {
   form: {
     display: "flex",
     flexDirection: "column",
-   
     width: "600px",
     padding: "50px",
     backgroundColor: "#fff",
@@ -91,8 +132,6 @@ const styles = {
     borderRadius: "4px",
   },
   button: {
-    // width: "100%",
-    alignItems: "center",
     padding: "10px",
     fontSize: "20px",
     color: "#fff",

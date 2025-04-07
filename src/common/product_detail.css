@@ -32,7 +32,7 @@
 }
 
 .quantity-button {
-  
+  margin-bottom: 20px;
   color: rgb(69, 67, 67);
   border: 1px solid #000000;
   border-radius: 5px;
@@ -53,6 +53,7 @@
 }
 
 .add-to-cart {
+  margin-right: 10px;
   background-color: #000000;
   color: white;
   border: none;
@@ -64,6 +65,22 @@
 }
 
 .add-to-cart:hover {
+  background-color: #7993aebc;
+  transform: scale(1.05);
+}
+
+.add-to-favourite{
+margin-left: 10px;
+  background-color: #e98585;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.add-to-favourite:hover {
   background-color: #7993aebc;
   transform: scale(1.05);
 }

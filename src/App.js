@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { FaUserFriends, FaHeart, FaCartPlus } from "react-icons/fa";
+import { FaUser, FaUserFriends, FaHeart, FaCartPlus, FaSignInAlt } from "react-icons/fa";
 import { Icon } from "@mui/material";
 import SimpleSlider from "./common/slider";
 import Catagory from "./common/category";
@@ -10,19 +10,21 @@ import "./common/slider.css";
 import Concerns from "./common/concerns";
 import Testimonials from "./common/testimonials";
 import NavigationMenuDemo from "./common/navbar";
+import Footer from "./common/footer";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
+  useNavigate,
   useLocation,
 } from "react-router-dom";
 import ProductDetails from "./common/product_detail";
 import ConcernDetails from "./common/concern_details";
 import SplashScreen from "./common/SplashScreen";
-import { FaSignInAlt } from "react-icons/fa";
 import LoginPage from "./common/login";
-
+import Cart from "./common/addtocart";
+import FavoritesPage from "./common/favourite"
 
 function App() {
   const limit = 10;
@@ -54,46 +56,7 @@ function App() {
       {showSplash && <SplashScreen />}
       <PageTransition displaySplash={displaySplashScreen}>
         <div className="App">
-          <nav className="navbar">
-            <div className="navbar-upper">
-              <h2>E C O S M I C</h2>
-              <div className="search">
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  fullWidth
-                  label="Search"
-                  sx={{
-                    backgroundColor: "lightgray",
-                    borderRadius: "5px",
-                  }}
-                />
-                <Icon>
-                  <FaUserFriends />
-                </Icon>
-              </div>
-              <ul className="nav-links">
-                <li>
-                  <a href="#">
-                    {" "}
-                    <FaCartPlus />{" "}
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <FaHeart />
-                  </a>
-                </li>
-               
-                <li>
-                <Link to="/login">
-              <FaSignInAlt />
-            </Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
-
+          <Navbar /> {/* Updated Navbar Component */}
           <Routes>
             <Route
               path="/"
@@ -152,16 +115,87 @@ function App() {
                   <div className="Testimonials">
                     <Testimonials />
                   </div>
+
+                  <div className="Footer">
+                    <Footer />
+                  </div>
                 </>
               }
             />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/concerns/:id" element={<ConcernDetails />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/favourite" element={<FavoritesPage />} />
           </Routes>
         </div>
       </PageTransition>
     </Router>
+  );
+}
+
+// ✅ Updated Navbar Component
+function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is logged in
+    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn"); // Clear login state
+    localStorage.removeItem("userEmail");
+    setIsLoggedIn(false);
+    navigate("/"); // Redirect to home page
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-upper">
+        <h2>E C O S M I C</h2>
+        <div className="search">
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            fullWidth
+            label="Search"
+            sx={{
+              backgroundColor: "lightgray",
+              borderRadius: "5px",
+            }}
+          />
+          <Icon>
+            <FaUserFriends />
+          </Icon>
+        </div>
+        <ul className="nav-links">
+          <li>
+            <Link to="/cart">
+              <FaCartPlus />
+            </Link>
+          </li>
+          <li>
+          <Link to="/favourite">
+              <FaHeart />
+            </Link>
+            
+          </li>
+          <li>
+            {isLoggedIn ? (
+              <button onClick={handleLogout} style={{ background: "none", border: "none", cursor: "pointer", }}>
+                <FaUserFriends size={30} /> {/* Show User Icon when logged in */}
+              </button>
+            ) : (
+              <Link to="/login">
+                <FaSignInAlt /> {/* Show Login Icon when logged out */}
+              </Link>
+            )}
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 }
 
